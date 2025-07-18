@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Vendas {
@@ -11,7 +12,22 @@ public class Vendas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venda")
-    private int id_venda;
+    private Long id_venda;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Clientes clientes;
+
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario", nullable = false)
+    private Funcionarios funcionarios;
+
+    @ManyToMany
+    @JoinTable(name = "venda_produto",
+            joinColumns = @JoinColumn(name = "id_venda", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_produto", nullable = false))
+    private Set<Produtos> produtos;
+
 
     @Column(name = "data_venda", nullable = false)
     private Date data_venda;
@@ -28,7 +44,7 @@ public class Vendas {
     public Vendas() {
     }
 
-    public Vendas(int id_venda, Date data_venda, double total_venda, double desconto_venda, String formaPagamento_venda) {
+    public Vendas(Long id_venda, Date data_venda, double total_venda, double desconto_venda, String formaPagamento_venda) {
         this.id_venda = id_venda;
         this.data_venda = data_venda;
         this.total_venda = total_venda;
@@ -36,11 +52,11 @@ public class Vendas {
         this.formaPagamento_venda = formaPagamento_venda;
     }
 
-    public int getId_venda() {
+    public Long getId_venda() {
         return id_venda;
     }
 
-    public void setId_venda(int id_venda) {
+    public void setId_venda(Long id_venda) {
         this.id_venda = id_venda;
     }
 

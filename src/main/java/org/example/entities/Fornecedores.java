@@ -3,6 +3,7 @@ package org.example.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Fornecedores {
@@ -10,7 +11,10 @@ public class Fornecedores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_fornecedor")
-    private int id_fornecedor;
+    private Long id_fornecedor;
+
+    @OneToMany(mappedBy = "fornecedores")
+    private Set<Produtos> produtos;
 
     @NotBlank(message = "Obrigatório preencher nome")
     @Size(max = 100, message = "Nome deve conter 100 caracteres máximo")
@@ -24,7 +28,7 @@ public class Fornecedores {
 
     @NotBlank(message = "Obrigatório preencher telefone")
     @Size(max = 14, message = "Telefone deve conter 14 caracteres máximo")
-    @Column(name = "telefone_for", nullable = false, length = 14)
+    @Column(name = "telefone_for", nullable = false, length = 15)
     private String telefone_for;
 
     @Size(max = 100, message = "Email deve conter 100 caracteres máximo")
@@ -34,7 +38,7 @@ public class Fornecedores {
     public Fornecedores() {
     }
 
-    public Fornecedores(int id_fornecedor, String nome_for, String cnpj_for, String telefone_for, String email_for) {
+    public Fornecedores(Long id_fornecedor, String nome_for, String cnpj_for, String telefone_for, String email_for) {
         this.id_fornecedor = id_fornecedor;
         this.nome_for = nome_for;
         this.cnpj_for = cnpj_for;
@@ -42,11 +46,11 @@ public class Fornecedores {
         this.email_for = email_for;
     }
 
-    public int getId_fornecedor() {
+    public Long getId_fornecedor() {
         return id_fornecedor;
     }
 
-    public void setId_fornecedor(int id_fornecedor) {
+    public void setId_fornecedor(Long id_fornecedor) {
         this.id_fornecedor = id_fornecedor;
     }
 

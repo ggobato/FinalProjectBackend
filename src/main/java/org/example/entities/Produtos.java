@@ -3,6 +3,7 @@ package org.example.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Produtos {
@@ -10,7 +11,14 @@ public class Produtos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
-    private int id_produto;
+    private Long id_produto;
+
+    @ManyToMany(mappedBy = "produtos")
+    private Set<Vendas> vendas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_fornecedor", nullable = false)
+    private Fornecedores fornecedores;
 
     @NotBlank(message = "Obrigatório preencher nome")
     @Size(max = 100, message = "Nome deve conter 100 caracteres máximo")
@@ -36,7 +44,7 @@ public class Produtos {
     public Produtos() {
     }
 
-    public Produtos(int id_produto, String nome_prod, String marca_prod, int qtde_prod, double preco_prod, String descricao_prod) {
+    public Produtos(Long id_produto, String nome_prod, String marca_prod, int qtde_prod, double preco_prod, String descricao_prod) {
         this.id_produto = id_produto;
         this.nome_prod = nome_prod;
         this.marca_prod = marca_prod;
@@ -45,11 +53,11 @@ public class Produtos {
         this.descricao_prod = descricao_prod;
     }
 
-    public int getId_produto() {
+    public Long getId_produto() {
         return id_produto;
     }
 
-    public void setId_produto(int id_produto) {
+    public void setId_produto(Long id_produto) {
         this.id_produto = id_produto;
     }
 

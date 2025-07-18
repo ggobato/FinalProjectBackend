@@ -3,6 +3,7 @@ package org.example.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Funcionarios {
@@ -10,7 +11,10 @@ public class Funcionarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_funcionario")
-    private int id_funcionario;
+    private Long id_funcionario;
+
+    @OneToMany(mappedBy = "funcionarios")
+    private List<Vendas> vendas;
 
     @NotBlank(message = "Obrigatório preencher nome")
     @Size(max = 100, message = "Nome deve conter 100 caracteres máximo.")
@@ -19,12 +23,12 @@ public class Funcionarios {
 
     @NotBlank(message = "CPF inválido")
     @Size(max = 11, message = "CPF deve conter 11 caracteres máximo")
-    @Column(name = "cpf_func", nullable = false, length = 11)
+    @Column(name = "cpf_func", nullable = false, length = 14)
     private String cpf_func;
 
     @NotBlank(message = "Obrigatório preencher telefone")
     @Size(max = 14, message = "Telefone deve conter 14 caracteres máximo")
-    @Column(name = "telefone_func", nullable = false, length = 14)
+    @Column(name = "telefone_func", nullable = false, length = 15)
     private String telefone_func;
 
     @NotBlank(message = "Obrigatório preencher email")
@@ -35,7 +39,7 @@ public class Funcionarios {
     public Funcionarios() {
     }
 
-    public Funcionarios(int id_funcionario, String nome_func, String cpf_func, String telefone_func, String email_func) {
+    public Funcionarios(Long id_funcionario, String nome_func, String cpf_func, String telefone_func, String email_func) {
         this.id_funcionario = id_funcionario;
         this.nome_func = nome_func;
         this.cpf_func = cpf_func;
@@ -43,11 +47,11 @@ public class Funcionarios {
         this.email_func = email_func;
     }
 
-    public int getId_funcionario() {
+    public Long getId_funcionario() {
         return id_funcionario;
     }
 
-    public void setId_funcionario(int id_funcionario) {
+    public void setId_funcionario(Long id_funcionario) {
         this.id_funcionario = id_funcionario;
     }
 
