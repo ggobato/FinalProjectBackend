@@ -1,5 +1,6 @@
 package org.example.resources;
 
+import org.example.dto.ClienteDTO;
 import org.example.entities.Clientes;
 import org.example.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,16 @@ public class ClienteResource {
     }
 
     @PostMapping
-    public ResponseEntity<Clientes> insert(@Valid @RequestBody Clientes obj) {
-        obj = service.insert(obj);
+    public ResponseEntity<Clientes> insert(@Valid @RequestBody ClienteDTO dto) {
+        Clientes obj = service.insert(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Clientes> update(@Valid @RequestBody Clientes obj, @PathVariable Long id) {
-        obj.setId_cliente(obj.getId_cliente());
-        service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<ClienteDTO> update(@Valid @RequestBody ClienteDTO dto, @PathVariable Long id) {
+        Clientes updatedCliente = service.update(id, dto);
+        ClienteDTO responseDto = service.convertToDto(updatedCliente);
+        return ResponseEntity.ok(responseDto);
     }
 
     @DeleteMapping(value = "/{id}")

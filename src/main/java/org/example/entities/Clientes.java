@@ -16,6 +16,10 @@ public class Clientes {
     @OneToMany(mappedBy = "clientes")
     private List<Vendas> vendas;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_contato", nullable = false)
+    private Contatos contatos;
+
     @NotBlank(message = "Obrigatório preencher nome")
     @Size(max = 100, message = "Nome deve conter menos de 100 caracteres")
     @Column(name = "nome_cli", nullable = false, length = 100)
@@ -84,5 +88,13 @@ public class Clientes {
 
     public void setEmail_cli(String email_cli) {
         this.email_cli = email_cli;
+    }
+
+    public Contatos getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(Contatos contatos) {
+        this.contatos = contatos;
     }
 }

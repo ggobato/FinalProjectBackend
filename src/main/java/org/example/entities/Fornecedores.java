@@ -16,6 +16,10 @@ public class Fornecedores {
     @OneToMany(mappedBy = "fornecedores")
     private Set<Produtos> produtos;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_contato")
+    private Contatos contatos;
+
     @NotBlank(message = "Obrigatório preencher nome")
     @Size(max = 100, message = "Nome deve conter 100 caracteres máximo")
     @Column(name = "nome_for", nullable = false, length = 100)
