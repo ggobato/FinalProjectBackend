@@ -1,5 +1,6 @@
 package org.example.resources;
 
+import org.example.dto.FornecedorDTO;
 import org.example.entities.Fornecedores;
 import org.example.services.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,16 @@ public class FornecedorResource {
     }
 
     @PostMapping
-    public ResponseEntity<Fornecedores> insert(@Valid @RequestBody Fornecedores obj) {
-        obj = service.insert(obj);
+    public ResponseEntity<Fornecedores> insert(@Valid @RequestBody FornecedorDTO dto) {
+        Fornecedores obj = service.insert(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Fornecedores> update(@Valid @RequestBody Fornecedores obj, @PathVariable Long id) {
-        obj.setId_fornecedor(obj.getId_fornecedor());
-        service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<FornecedorDTO> update(@Valid @RequestBody FornecedorDTO dto, @PathVariable Long id) {
+        Fornecedores updatedFornecedor = service.update(id, dto);
+        FornecedorDTO responseDto = service.convertToDTO(updatedFornecedor);
+        return ResponseEntity.ok(responseDto);
     }
 
     @DeleteMapping(value = "/{id}")

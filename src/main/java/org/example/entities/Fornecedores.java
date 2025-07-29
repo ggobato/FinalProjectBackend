@@ -17,13 +17,18 @@ public class Fornecedores {
     private Set<Produtos> produtos;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_contato")
+    @JoinColumn(name = "id_contato", nullable = false)
     private Contatos contatos;
 
-    @NotBlank(message = "Obrigatório preencher nome")
-    @Size(max = 100, message = "Nome deve conter 100 caracteres máximo")
-    @Column(name = "nome_for", nullable = false, length = 100)
+    @NotBlank(message = "Obrigatório preencher nome fantasia")
+    @Size(max = 50, message = "Nome deve conter 50 caracteres máximo")
+    @Column(name = "nome_for", nullable = false, length = 50)
     private String nome_for;
+
+    @NotBlank(message = "Obrigatótio preencher")
+    @Size(max = 255, message = "Razão Social inválida")
+    @Column(name = "razao_social_for", nullable = false, length = 255)
+    private String razao_social_for;
 
     @NotBlank(message = "Obrigatório preencher CNPJ")
     @Size(max = 18, message = "CNPJ inválido")
@@ -42,9 +47,10 @@ public class Fornecedores {
     public Fornecedores() {
     }
 
-    public Fornecedores(Long id_fornecedor, String nome_for, String cnpj_for, String telefone_for, String email_for) {
+    public Fornecedores(Long id_fornecedor, String nome_for, String razao_social_for, String cnpj_for, String telefone_for, String email_for) {
         this.id_fornecedor = id_fornecedor;
         this.nome_for = nome_for;
+        this.razao_social_for = razao_social_for;
         this.cnpj_for = cnpj_for;
         this.telefone_for = telefone_for;
         this.email_for = email_for;
@@ -88,5 +94,21 @@ public class Fornecedores {
 
     public void setEmail_for(String email_for) {
         this.email_for = email_for;
+    }
+
+    public Contatos getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(Contatos contatos) {
+        this.contatos = contatos;
+    }
+
+    public String getRazao_social_for() {
+        return razao_social_for;
+    }
+
+    public void setRazao_social_for(String razao_social_for) {
+        this.razao_social_for = razao_social_for;
     }
 }
