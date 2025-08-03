@@ -1,5 +1,7 @@
 package org.example.dto;
 
+import org.example.entities.Contatos;
+
 public class ContatoDTO {
 
     private String cep;
@@ -10,6 +12,15 @@ public class ContatoDTO {
     private String uf;
 
     public ContatoDTO() {
+    }
+
+    public ContatoDTO(Contatos contatos) {
+        this.cep = contatos.getCep_ctt();
+        this.municipio = contatos.getMunicipio_ctt();
+        this.logradouro = contatos.getLogradouro_ctt();
+        this.numero = contatos.getNumero_ctt();
+        this.complemento = contatos.getComplemento_ctt();
+        this.uf = contatos.getUf_ctt();
     }
 
     public String getCep() {

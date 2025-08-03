@@ -23,10 +23,10 @@ public class ClienteService {
     public ClienteDTO convertToDto(Clientes clientes) {
         ClienteDTO dto = new ClienteDTO();
 
-        dto.setNome(clientes.getNome_cli());
-        dto.setCpf(clientes.getCpf_cli());
-        dto.setTelefone(clientes.getTelefone_cli());
-        dto.setEmail(clientes.getEmail_cli());
+        dto.setNome_cli(clientes.getNome_cli());
+        dto.setCpf_cli(clientes.getCpf_cli());
+        dto.setTelefone_cli(clientes.getTelefone_cli());
+        dto.setEmail_cli(clientes.getEmail_cli());
 
         if (clientes.getContatos() != null) {
             ContatoDTO contatoDTO = new ContatoDTO();
@@ -77,10 +77,10 @@ public class ClienteService {
 
         Clientes clientes = new Clientes();
 
-        clientes.setNome_cli(dto.getNome());
-        clientes.setCpf_cli(dto.getCpf());
-        clientes.setTelefone_cli(dto.getTelefone());
-        clientes.setEmail_cli(dto.getEmail());
+        clientes.setNome_cli(dto.getNome_cli());
+        clientes.setCpf_cli(dto.getCpf_cli());
+        clientes.setTelefone_cli(dto.getTelefone_cli());
+        clientes.setEmail_cli(dto.getEmail_cli());
 
         clientes.setContatos(contatos);
 
@@ -91,10 +91,10 @@ public class ClienteService {
         try {
             Clientes clientes = findById(id);
 
-            clientes.setNome_cli(dto.getNome());
-            clientes.setCpf_cli(dto.getCpf());
-            clientes.setTelefone_cli(dto.getTelefone());
-            clientes.setEmail_cli(dto.getEmail());
+            clientes.setNome_cli(dto.getNome_cli());
+            clientes.setCpf_cli(dto.getCpf_cli());
+            clientes.setTelefone_cli(dto.getTelefone_cli());
+            clientes.setEmail_cli(dto.getEmail_cli());
 
             Contatos contatos = clientes.getContatos();
 
