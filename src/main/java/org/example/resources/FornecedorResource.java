@@ -26,9 +26,10 @@ public class FornecedorResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Fornecedores> findById(@PathVariable Long id) {
-        Fornecedores obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<FornecedorDTO> findById(@PathVariable Long id) {
+        Fornecedores fornecedores = service.findById(id);
+        FornecedorDTO fornecedorDTO = new FornecedorDTO(fornecedores);
+        return ResponseEntity.ok().body(fornecedorDTO);
     }
 
     @PostMapping
