@@ -17,7 +17,7 @@ public class Produtos {
     private Set<Vendas> vendas;
 
     @ManyToOne
-    @JoinColumn(name = "id_fornecedor", nullable = false)
+    @JoinColumn(name = "id_fornecedor", nullable = true)
     private Fornecedores fornecedores;
 
     @NotBlank(message = "Obrigatório preencher nome")

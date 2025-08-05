@@ -2,6 +2,7 @@ package org.example.resources;
 
 import org.example.dto.FornecedorDTO;
 import org.example.entities.Fornecedores;
+import org.example.repositories.FornecedorRepository;
 import org.example.services.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,14 @@ public class FornecedorResource {
 
     @Autowired
     private FornecedorService service;
+
+    @Autowired
+    private FornecedorRepository repository;
+
+    @GetMapping("/count")
+    public Long countFornecedores() {
+        return repository.count();
+    }
 
     @GetMapping
     public ResponseEntity<List<Fornecedores>> findAll() {

@@ -2,6 +2,7 @@ package org.example.resources;
 
 import org.example.dto.ClienteDTO;
 import org.example.entities.Clientes;
+import org.example.repositories.ClienteRepository;
 import org.example.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,14 @@ public class ClienteResource {
 
     @Autowired
     private ClienteService service;
+
+    @Autowired
+    private ClienteRepository repository;
+
+    @GetMapping("/count")
+    public Long countClientes() {
+        return repository.count();
+    }
 
     @GetMapping
     public ResponseEntity<List<Clientes>> findAll() {

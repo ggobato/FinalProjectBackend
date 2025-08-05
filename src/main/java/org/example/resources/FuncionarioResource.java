@@ -1,6 +1,7 @@
 package org.example.resources;
 
 import org.example.entities.Funcionarios;
+import org.example.repositories.FuncionarioRepository;
 import org.example.services.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,14 @@ public class FuncionarioResource {
 
     @Autowired
     private FuncionarioService service;
+
+    @Autowired
+    private FuncionarioRepository repository;
+
+    @GetMapping("/count")
+    public Long countFuncionarios() {
+        return repository.count();
+    }
 
     @GetMapping
     public ResponseEntity<List<Funcionarios>> findAll() {
